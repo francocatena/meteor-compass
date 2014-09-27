@@ -15,7 +15,7 @@ meteor add fourseven:scss
 meteor add francocatena:compass
 ```
 
-3. Create a scss.json configuration file in your app:
+3. Create a `scss.json` configuration file in the app's root with:
 
 ```json
 {
