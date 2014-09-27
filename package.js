@@ -1,7 +1,7 @@
 Package.describe({
   name: 'francocatena:compass',
   summary: 'Stylesheet Authoring Environment that makes your website design simpler',
-  version: '0.4.1',
+  version: '0.4.2',
   git: 'https://github.com/francocatena/meteor-compass'
 });
 
