@@ -1,7 +1,5 @@
 {
-  "includePaths": {
-    ".": [
-      "./"
-    ]
-  }
+  "includePaths": [
+    ".meteor/local/build/programs/server/assets/packages/francocatena_compass"
+  ]
 }
