@@ -15,12 +15,22 @@ meteor add fourseven:scss
 meteor add francocatena:compass
 ```
 
+3. Create a scss.json configuration file in your app:
+
+```json
+{
+  "includePaths": [
+    ".meteor/local/build/programs/server/assets/packages/francocatena_compass"
+  ]
+}
+```
+
 ## Usage
 
-1. Simply import Compass at the top of your sass file (*Currently working on a way to provide a less verbose import command*):
+1. Simply import any Compass mixin at the top of your sass file
 
 ```scss
-@import ".meteor/local/build/programs/server/assets/packages/francocatena_compass/compass"
+@import "compass/reset";
 ```
 
 ---
