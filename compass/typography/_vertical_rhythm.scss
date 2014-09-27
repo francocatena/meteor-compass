@@ -1,4 +1,3 @@
-@import "compass/support";
 @import "compass/layout/grid-background";
 @import "compass/typography/units";
 
@@ -97,7 +96,7 @@ $relative-font-sizing: if($rhythm-unit == px, false, true);
 @mixin establish-baseline($font-size: $base-font-size) {
   $relative-size: 100% * ($font-size / $browser-default-font-size);
 
-  @if support-legacy-browser(ie, "6") and (not $relative-font-sizing) {
+  @if $legacy-support-for-ie6 and (not $relative-font-sizing) {
     // IE 6 refuses to resize fonts set in pixels and it weirdly resizes fonts
     // whose root is set in ems. So we set the root font size in percentages of
     // the default font size, even if we are using absolute sizes elsewhere.
@@ -137,7 +136,7 @@ $relative-font-sizing: if($rhythm-unit == px, false, true);
     background: image-url($img);
   }
   @else {
-    @include baseline-grid-background(if($round-to-nearest-half-line, rhythm(1/2), rhythm(1)));
+    @include baseline-grid-background(rhythm());
   }
 }
 

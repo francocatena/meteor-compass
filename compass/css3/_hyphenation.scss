@@ -1,10 +1,11 @@
 // Mixins to support specific CSS Text Level 3 elements
 
-@import "compass/support";
+@import "shared";
 
-// The the user threshold for hyphens support.
-// Defaults to `$graceful-usage-threshold`.
-$hyphens-support-threshold: $graceful-usage-threshold !default;
+// @private css3-feature-support variables must always include a list of five boolean values
+// representing in order: -moz, -webkit, -o, -ms, -khtml.
+//   - mozilla/webkit legacy support handled seperately below
+$hyphens-support: -moz, -webkit, -o, -ms, not -khtml;
 
 
 // Mixin for word-break properties
@@ -16,17 +17,15 @@ $hyphens-support-threshold: $graceful-usage-threshold !default;
 //
 // Which generates:
 //    p.wordBreak {
+//      -ms-word-break: break-all;
 //      word-break: break-all;
 //      word-break: break-word;}
 //
 @mixin word-break($value: normal){
   word-break: $value;
-  @if $value == break-all {
-    //Webkit handles break-all differently... as break-word
-    @include with-prefix(-webkit) {
-      word-break: break-word;
-    }
-  }
+
+  //Webkit handles break-all differently... as break-word
+  @if $value == break-all { word-break: break-word; }
 }
 
 // Mixin for the hyphens property
@@ -44,9 +43,7 @@ $hyphens-support-threshold: $graceful-usage-threshold !default;
 //    hyphens: auto;}
 //
 @mixin hyphens($value: auto){
-  @include prefixed-properties(css-hyphens, $hyphens-support-threshold, (
-    hyphens: $value
-  ));
+  @include experimental(hyphens, $value, $hyphens-support);
 }
 
 // Mixin for x-browser hyphenation based on @auchenberg's post:
@@ -65,7 +62,7 @@ $hyphens-support-threshold: $graceful-usage-threshold !default;
 //      -webkit-hyphens: auto;
 //      hyphens: auto;}
 //
-@mixin hyphenation {
+@mixin hyphenation{
   @include word-break(break-all);
   @include hyphens;
 }

@@ -1,11 +1,10 @@
 // Regions
 
-@import "compass/support";
+@import "shared";
 
-// The prefixed support threshold for css regions.
-// Defaults to the $graceful-usage-threshold.
-$regions-support-threshold: $graceful-usage-threshold !default;
-
+// @private css3-feature-support variables must always include a list of five boolean values
+// representing in order: -moz, -webkit, -o, -ms, -khtml.
+$regions-support: not -moz, -webkit, not -o, -ms, not -khtml;
 
 // Webkit, IE10 and future support for [CSS Regions](http://dev.w3.org/csswg/css3-regions/)
 //
@@ -18,10 +17,10 @@ $regions-support-threshold: $graceful-usage-threshold !default;
 
 @mixin flow-into($target) {
   $target: unquote($target);
-  @include prefixed-properties(css-regions, $regions-support-threshold, (flow-into: $target));
+  @include experimental(flow-into, $target, $regions-support...);
 }
 
 @mixin flow-from($target) {
   $target: unquote($target);
-  @include prefixed-properties(css-regions, $regions-support-threshold, (flow-from: $target));
+  @include experimental(flow-from, $target, $regions-support...);
 }

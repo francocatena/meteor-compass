@@ -1,7 +1,9 @@
-@import "compass/support";
+@import "shared";
 
-// The the user threshold for transform support. Defaults to `$graceful-usage-threshold`
-$transform-support-threshold: $graceful-usage-threshold !default;
+// @private css3-feature-support variables must always include a list of five boolean values
+// representing in order: -moz, -webkit, -o, -ms, -khtml.
+$transform-support: -moz, -webkit, -o, -ms, not -khtml;
+$transform3d-support: $transform-support;
 
 // @doc off
 // Note ----------------------------------------------------------------------
@@ -104,10 +106,12 @@ $default-skew-y      : 5deg                  !default;
 // @param only3d Set this to true to only apply this
 // mixin where browsers have 3D support.
 @mixin apply-origin($origin, $only3d) {
-  $capability: if($only3d or length($origin) > 2, transforms3d, transforms2d);
-  @include prefixed-properties($capability, $transform-support-threshold, (
-    transform-origin: $origin
-  ));
+  $only3d: $only3d or -compass-list-size(-compass-list($origin)) > 2;
+  @if $only3d {
+    @include experimental(transform-origin, $origin, $transform3d-support...);
+  } @else {
+    @include experimental(transform-origin, $origin, $transform-support...);
+  }
 }
 
 // Transform-origin sent as individual arguments:
@@ -142,10 +146,11 @@ $default-skew-y      : 5deg                  !default;
   $transform,
   $only3d: false
 ) {
-  $capability: if($only3d, transforms3d, transforms2d);
-  @include prefixed-properties($capability, $transform-support-threshold, (
-    transform: $transform
-  ));
+  @if $only3d {
+    @include experimental(transform, $transform, $transform3d-support...);
+  } @else {
+    @include experimental(transform, $transform, $transform-support...);
+  }
 }
 
 // Shortcut to target all browsers with 2D transform support
@@ -170,9 +175,7 @@ $default-skew-y      : 5deg                  !default;
 // z-axis. The higher the perspective, the more exaggerated the foreshortening.
 // values from 500 to 1000 are more-or-less "normal" - a good starting-point.
 @mixin perspective($p) {
-  @include prefixed-properties(transforms3d, $transform-support-threshold, (
-    perspective: $p
-  ));
+  @include experimental(perspective, $p, $transform3d-support...);
 }
 
 // Set the origin position for the perspective
@@ -181,9 +184,7 @@ $default-skew-y      : 5deg                  !default;
 //
 // where the two arguments represent x/y coordinates
 @mixin perspective-origin($origin: 50%) {
-  @include prefixed-properties(transforms3d, $transform-support-threshold, (
-    perspective-origin: $origin
-  ));
+  @include experimental(perspective-origin, $origin, $transform3d-support...);
 }
 
 // Determine whether a 3D objects children also live in the given 3D space
@@ -193,9 +194,7 @@ $default-skew-y      : 5deg                  !default;
 // where `style` can be either `flat` or `preserve-3d`.
 // Browsers default to `flat`, mixin defaults to `preserve-3d`.
 @mixin transform-style($style: preserve-3d) {
-  @include prefixed-properties(transforms3d, $transform-support-threshold, (
-    transform-style: $style
-  ));
+  @include experimental(transform-style, $style, $transform3d-support...);
 }
 
 // Determine the visibility of an element when it's back is turned
@@ -205,9 +204,7 @@ $default-skew-y      : 5deg                  !default;
 // where `visibility` can be either `visible` or `hidden`.
 // Browsers default to visible, mixin defaults to hidden
 @mixin backface-visibility($visibility: hidden) {
-  @include prefixed-properties(transforms3d, $transform-support-threshold, (
-    backface-visibility: $visibility
-  ));
+  @include experimental(backface-visibility, $visibility, $transform3d-support...);
 }
 
 // @doc off

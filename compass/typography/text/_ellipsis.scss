@@ -1,4 +1,4 @@
-@import "compass/css3/deprecated-support";
+@import "compass/css3/shared";
 
 // To get full firefox support, you must install the ellipsis pattern:
 //
@@ -20,6 +20,6 @@ $use-mozilla-ellipsis-binding: false !default;
     official
   );
   @if $legacy-support-for-mozilla and $use-mozilla-ellipsis-binding {
-    -moz-binding: stylesheet-url(unquote("xml/ellipsis.xml#ellipsis"));
+    -moz-binding: stylesheet-url(unquote("xml/ellipsis.xml#ellipsis"));    
   }
 }
