@@ -3,13 +3,11 @@
 // they become available in browsers:
 // http://www.w3.org/TR/2000/WD-css3-userint-20000216
 
-@import "shared";
+@import "compass/support";
 
-// @private css3-feature-support variables must always include a list of five boolean values
-// representing in order: -moz, -webkit, -ms, -o, -khtml
-//   - mozilla support handled seperately below
-$userselect-support: not -moz, -webkit, -ms, not -o, -khtml;
-
+// The prefixed support threshold for user-select.
+// Defaults to the $graceful-usage-threshold.
+$userselect-support-threshold: $graceful-usage-threshold !default;
 
 // This property controls the selection model and granularity of an element.
 //
@@ -18,39 +16,56 @@ $userselect-support: not -moz, -webkit, -ms, not -o, -khtml;
 @mixin user-select($select) {
   $select: unquote($select);
 
-  @if $experimental-support-for-mozilla {
-    -moz-user-select: if($select == 'none', -moz-none, $select);
+  @include with-each-prefix(user-select-none, $userselect-support-threshold) {
+    // old Firefox used a proprietary `-moz-none` value, starting with Firefox 21 `none` behaves like `-moz-none`
+    // @link https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+    @include prefix-prop(user-select, if($current-prefix == -moz and $select == 'none', -moz-none, $select));
   }
-  @include experimental(user-select, $select, $userselect-support...);
 }
+
+// The prefixed support threshold for input-placeholder.
+// Defaults to the $graceful-usage-threshold.
+$input-placeholder-support-threshold: $graceful-usage-threshold !default;
 
 // Style the html5 input placeholder in browsers that support it.
 //
-// There are two usage modes: at the stylesheet root, include the mixin with
-// styles passed as mixin content. This applies to all elements. For example:
+// The styles for the input placeholder are passed as mixin content
+// and the selector comes from the mixin's context.
 //
-//     @include input-placeholder {
-//       color: #bfbfbf;
-//       font-style: italic;
-//     }
+// For example:
 //
-// If a specific element is being styled, pass "&" as an argument to the mixin
-// as well. For example:
-//
-//     .textinput {
-//       @include input-placeholder("&") {
+//     #{elements-of-type(text-input)} {
+//       @include input-placeholder {
 //         color: #bfbfbf;
 //         font-style: italic;
 //       }
 //     }
-@mixin input-placeholder($selector: "") {
-  @if $experimental-support-for-webkit {
-    #{$selector}::-webkit-input-placeholder { @content; }
+//
+// if you want to apply the placeholder styles to all elements supporting
+// the `input-placeholder` pseudo class (beware of performance impacts):
+//
+//     * {
+//       @include input-placeholder {
+//         color: #bfbfbf;
+//         font-style: italic;
+//       }
+//     }
+@mixin input-placeholder {
+  @include with-each-prefix(css-placeholder, $input-placeholder-support-threshold) {
+    @if $current-prefix == -webkit {
+      &::-webkit-input-placeholder { @content; }
+    }
+    @elseif $current-prefix == -moz {
+      // for Firefox 19 and below
+      @if support-legacy-browser("firefox", "4", "19", $threshold: $input-placeholder-support-threshold) {
+        &:-moz-placeholder { @content; }
+      }
+      // for Firefox 20 and above
+      &::-moz-placeholder { @content; }
+    }
+    @elseif $current-prefix == -ms {
+      &:-ms-input-placeholder { @content; }
+    }
   }
-  @if $experimental-support-for-mozilla {
-    #{$selector}:-moz-placeholder { @content; }
-  }
-  @if $experimental-support-for-microsoft {
-    #{$selector}:-ms-input-placeholder { @content; }
-  }
+  // This is not standardized yet so no official selector is generated.
 }
