@@ -3,12 +3,12 @@ Package.describe({
   summary: 'Stylesheet Authoring Environment that makes your website design simpler',
   version: '0.6.0',
   git: 'https://github.com/francocatena/meteor-compass'
-});
+})
 
 Package.onUse(function (api) {
-  api.versionsFrom('METEOR@0.9.3')
+  api.versionsFrom('METEOR@0.9.4')
 
-  api.use('fourseven:scss@0.9.6', 'server')
+  api.use('fourseven:scss@1.0.0', 'server')
 
   api.addFiles('scss.json', 'server')
 
