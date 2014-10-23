@@ -1,23 +1,17 @@
 Compass for Meteor
 ==================
 
-[Compass](http://compass-style.org/) **0.13.alpha.4** packaged for [Meteor](https://www.meteor.com)
+[Compass](http://compass-style.org/) packaged for [Meteor](https://www.meteor.com)
 
 ## Install
 
-1. Make sure to add sass support to your meteor app:
-
-```bash
-$ meteor add fourseven:scss
-```
-
-2. From within your Meteor app's directory:
+1. From within your Meteor app's directory:
 
 ```bash
 $ meteor add francocatena:compass
 ```
 
-3. Create a `scss.json` configuration file in the app's root with:
+2. Create a `scss.json` configuration file in the app's root with:
 
 ```json
 {
