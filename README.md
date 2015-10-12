@@ -17,32 +17,10 @@ $ meteor add fourseven:scss
 $ meteor add francocatena:compass
 ```
 
-3. Create a `scss.json` configuration file in the app's root with:
-
-```json
-{
-  "includePaths": [
-    ".meteor/local/build/programs/server/assets/packages/francocatena_compass"
-  ]
-}
-```
-
 ## Usage
 
 1. Simply import any Compass mixin at the top of your sass file
 
 ```scss
-@import "compass/reset";
+@import "{francocatena:compass}/compass";
 ```
-
----
-
-## Important note
-
-Because Meteor will attempt to compile you app's local stylesheets prior to
-copying the server assets directory, the first time you run the app after
-installing the package your app will complain that it is unable to find it.
-For the moment this can be resolved by either stopping and restarting the app,
-at which point you should no longer get this error message, our running
-`touch` on you local stylesheet thats attempting to access the package,
-triggering a reload.

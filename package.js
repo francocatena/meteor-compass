@@ -1,14 +1,17 @@
 Package.describe({
   name: 'francocatena:compass',
   summary: 'Stylesheet Authoring Environment that makes your website design simpler',
-  version: '0.5.1',
+  version: '0.6.0',
   git: 'https://github.com/francocatena/meteor-compass'
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('METEOR@0.9.3')
+  api.versionsFrom('METEOR@1.2')
 
-  api.addFiles('scss.json', 'server')
+  api.use([
+    'meteor',
+    'fourseven:scss@3.3.3'
+  ])
 
   api.addFiles([
     '_compass.scss',
@@ -20,7 +23,6 @@ Package.onUse(function (api) {
     'compass/_support.scss',
     'compass/_typography.scss',
     'compass/_utilities.scss',
-    'compass/_css3.scss',
     'compass/css3/_animation.scss',
     'compass/css3/_appearance.scss',
     'compass/css3/_background-clip.scss',
@@ -98,5 +100,5 @@ Package.onUse(function (api) {
     'compass/utilities/text/_ellipsis.scss',
     'compass/utilities/text/_nowrap.scss',
     'compass/utilities/text/_replacement.scss'
-  ], 'server', { isAsset: true })
+  ], 'client')
 })

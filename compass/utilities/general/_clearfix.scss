@@ -2,7 +2,7 @@
 // Extends the bottom of the element to enclose any floats it contains.
 // @doc on
 
-@import "hacks";
+@import "{francocatena:compass}/compass/utilities/general/hacks";
 
 // This basic method is preferred for the usual case, when positioned
 // content will not show outside the bounds of the container.

@@ -15,11 +15,11 @@
 //     > li
 //       +horizontal-list-item
 
-@import "bullets";
-@import "compass/utilities/general/clearfix";
-@import "compass/utilities/general/reset";
-@import "compass/utilities/general/float";
-@import "compass/support";
+@import "{francocatena:compass}/compass/typography/lists/bullets";
+@import "{francocatena:compass}/compass/utilities/general/clearfix";
+@import "{francocatena:compass}/compass/utilities/general/reset";
+@import "{francocatena:compass}/compass/utilities/general/float";
+@import "{francocatena:compass}/compass/support";
 
 // Can be mixed into any selector that target a ul or ol that is meant
 // to have a horizontal layout. Used to implement +horizontal-list.
