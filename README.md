@@ -5,7 +5,7 @@ Compass for Meteor
 
 ## Install
 
-1. Make sure to add sass support to your meteor app:
+1. Make sure to add SASS support to your meteor app:
 
 ```bash
 $ meteor add fourseven:scss
@@ -19,8 +19,18 @@ $ meteor add francocatena:compass
 
 ## Usage
 
-1. Simply import any Compass mixin at the top of your sass file
+Simply import any Compass mixin at the top of your sass file
 
 ```scss
 @import "{francocatena:compass}/compass";
 ```
+
+Or if you want to only use one submodule
+
+```scss
+@import "{francocatena:compass}/compass/reset";
+```
+
+## Notes
+
+Versions 0.6.0 and onwards are only compatible with Meteor 1.2 or above
