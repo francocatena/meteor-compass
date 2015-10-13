@@ -1,7 +1,7 @@
 Package.describe({
   name: 'francocatena:compass',
   summary: 'Stylesheet Authoring Environment that makes your website design simpler',
-  version: '0.6.0',
+  version: '0.7.0',
   git: 'https://github.com/francocatena/meteor-compass'
 });
 
@@ -10,12 +10,13 @@ Package.onUse(function (api) {
 
   api.use([
     'meteor',
-    'fourseven:scss@3.3.3'
+    'fourseven:scss@3.4.0-beta1'
   ])
 
   api.addFiles([
     '_compass.scss',
     '_lemonade.scss',
+    'compass/_configuration.scss',
     'compass/_css3.scss',
     'compass/_layout.scss',
     'compass/_reset-legacy.scss',
@@ -33,7 +34,9 @@ Package.onUse(function (api) {
     'compass/css3/_box-shadow.scss',
     'compass/css3/_box-sizing.scss',
     'compass/css3/_columns.scss',
+    'compass/css3/_deprecated-support.scss',
     'compass/css3/_filter.scss',
+    'compass/css3/_flexbox.scss',
     'compass/css3/_font-face.scss',
     'compass/css3/_hyphenation.scss',
     'compass/css3/_images.scss',
@@ -45,7 +48,6 @@ Package.onUse(function (api) {
     'compass/css3/_shared.scss',
     'compass/css3/_text-shadow.scss',
     'compass/css3/_transform.scss',
-    'compass/css3/_transform-legacy.scss',
     'compass/css3/_transition.scss',
     'compass/css3/_user-interface.scss',
     'compass/layout/_grid-background.scss',
@@ -70,11 +72,13 @@ Package.onUse(function (api) {
     'compass/typography/_units.scss',
     'compass/typography/_vertical_rhythm.scss',
     'compass/utilities/_color.scss',
+    'compass/utilities/color/_brightness.scss',
     'compass/utilities/color/_contrast.scss',
     'compass/utilities/_general.scss',
     'compass/utilities/_links.scss',
     'compass/utilities/_lists.scss',
     'compass/utilities/_print.scss',
+    'compass/utilities/_sass.scss',
     'compass/utilities/_sprites.scss',
     'compass/utilities/_tables.scss',
     'compass/utilities/_text.scss',
@@ -92,6 +96,8 @@ Package.onUse(function (api) {
     'compass/utilities/lists/_horizontal-list.scss',
     'compass/utilities/lists/_inline-block-list.scss',
     'compass/utilities/lists/_inline-list.scss',
+    'compass/utilities/sass/_lists.scss',
+    'compass/utilities/sass/_maps.scss',
     'compass/utilities/sprites/_base.scss',
     'compass/utilities/sprites/_sprite-img.scss',
     'compass/utilities/tables/_alternating-rows-and-columns.scss',
